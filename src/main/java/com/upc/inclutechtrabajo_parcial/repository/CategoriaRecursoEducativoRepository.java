@@ -1,4 +1,7 @@
 package com.upc.inclutechtrabajo_parcial.repository;
 
-public interface CategoriaRecursoEducativoRepository {
+import com.upc.inclutechtrabajo_parcial.model.CategoriaRecursoEducativo;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CategoriaRecursoEducativoRepository extends JpaRepository<CategoriaRecursoEducativo, Integer> {
 }
