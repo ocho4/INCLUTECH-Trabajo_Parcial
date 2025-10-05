@@ -16,14 +16,25 @@ public class ForoController {
     @Autowired
     private ForoService foroService;
 
-    @PostMapping
+    @PostMapping("/registrar")
     public ResponseEntity<Foro> registrar(@RequestBody Foro foro) {
         return ResponseEntity.ok(foroService.registrar(foro));
     }
 
-    @GetMapping
+    @GetMapping("/listar")
     public ResponseEntity<List<Foro>> listar() {
         return ResponseEntity.ok(foroService.listar());
+    }
+
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<Foro> actualizar(@PathVariable Integer id, @RequestBody Foro foro) {
+        foro.setId(id);
+        return ResponseEntity.ok(foroService.registrar(foro));
+    }
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        foroService.eliminar(id);
+        return ResponseEntity.noContent().build();
     }
     @GetMapping("/usuario/{idUsuario}")
     public ResponseEntity<List<Foro>> listarPorUsuario(@PathVariable Integer idUsuario) {

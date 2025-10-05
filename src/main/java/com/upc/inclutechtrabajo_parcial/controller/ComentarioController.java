@@ -14,14 +14,26 @@ public class ComentarioController {
     @Autowired
     private ComentarioService comentarioService;
 
-    @PostMapping
+    @PostMapping("/registrar")
     public ResponseEntity<Comentario> registrar(@RequestBody Comentario comentario) {
         return ResponseEntity.ok(comentarioService.registrar(comentario));
     }
 
-    @GetMapping
+    @GetMapping("/listar")
     public ResponseEntity<List<Comentario>> listar() {
         return ResponseEntity.ok(comentarioService.listar());
+    }
+
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<Comentario> actualizar(@PathVariable Integer id, @RequestBody Comentario comentario) {
+        comentario.setId(id);
+        return ResponseEntity.ok(comentarioService.registrar(comentario));
+    }
+
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        comentarioService.eliminar(id);
+        return ResponseEntity.noContent().build();
     }
 }
 

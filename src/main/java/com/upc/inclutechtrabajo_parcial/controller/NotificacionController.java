@@ -14,13 +14,24 @@ public class NotificacionController {
     @Autowired
     private NotificacionService notificacionService;
 
-    @PostMapping
+    @PostMapping("/registrar")
     public ResponseEntity<Notificacion> registrar(@RequestBody Notificacion notificacion) {
         return ResponseEntity.ok(notificacionService.registrar(notificacion));
     }
 
-    @GetMapping
+    @GetMapping("/listar")
     public ResponseEntity<List<Notificacion>> listar() {
         return ResponseEntity.ok(notificacionService.listar());
+    }
+
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<Notificacion> actualizar(@PathVariable Integer id, @RequestBody Notificacion notificacion) {
+        notificacion.setId(id);
+        return ResponseEntity.ok(notificacionService.registrar(notificacion));
+    }
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        notificacionService.eliminar(id);
+        return ResponseEntity.noContent().build();
     }
 }

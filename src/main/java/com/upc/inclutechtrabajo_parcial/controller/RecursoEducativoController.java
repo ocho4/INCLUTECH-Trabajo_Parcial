@@ -14,14 +14,26 @@ public class RecursoEducativoController {
     @Autowired
     private RecursoEducativoService recursoService;
 
-    @PostMapping
+    @PostMapping("/registrar")
     public ResponseEntity<RecursoEducativo> registrar(@RequestBody RecursoEducativo recurso) {
         return ResponseEntity.ok(recursoService.registrar(recurso));
     }
 
-    @GetMapping
+    @GetMapping("/listar")
     public ResponseEntity<List<RecursoEducativo>> listar() {
         return ResponseEntity.ok(recursoService.listar());
+    }
+
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<RecursoEducativo> actualizar(@PathVariable Integer id, @RequestBody RecursoEducativo recurso) {
+        recurso.setId(id);
+        return ResponseEntity.ok(recursoService.registrar(recurso));
+    }
+
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        recursoService.eliminar(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

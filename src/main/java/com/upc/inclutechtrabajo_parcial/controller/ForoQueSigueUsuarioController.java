@@ -14,13 +14,24 @@ public class ForoQueSigueUsuarioController {
     @Autowired
     private ForoQueSigueUsuarioService foroSeguidoService;
 
-    @PostMapping
+    @PostMapping("/registrar")
     public ResponseEntity<ForoQueSigueUsuario> registrar(@RequestBody ForoQueSigueUsuario seguimiento) {
         return ResponseEntity.ok(foroSeguidoService.registrar(seguimiento));
     }
 
-    @GetMapping
+    @GetMapping("/listar")
     public ResponseEntity<List<ForoQueSigueUsuario>> listar() {
         return ResponseEntity.ok(foroSeguidoService.listar());
+    }
+
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<ForoQueSigueUsuario> actualizar(@PathVariable Integer id, @RequestBody ForoQueSigueUsuario seguimiento) {
+        seguimiento.setId(id);
+        return ResponseEntity.ok(foroSeguidoService.registrar(seguimiento));
+    }
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        foroSeguidoService.eliminar(id);
+        return ResponseEntity.noContent().build();
     }
 }

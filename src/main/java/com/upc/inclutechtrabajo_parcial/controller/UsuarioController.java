@@ -14,7 +14,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping
+    @PostMapping("/registar")
     public ResponseEntity<UsuarioDTO> registrar(@RequestBody UsuarioDTO dto) {
         return ResponseEntity.ok(usuarioService.registrar(dto));
     }
@@ -22,6 +22,17 @@ public class UsuarioController {
     @GetMapping("/listar")
     public ResponseEntity<List<UsuarioDTO>> listar() {
         return ResponseEntity.ok(usuarioService.listar());
+    }
+
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<UsuarioDTO> actualizar(@PathVariable Integer id, @RequestBody UsuarioDTO dto) {
+        dto.setId(id);
+        return ResponseEntity.ok(usuarioService.registrar(dto));
+    }
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        usuarioService.eliminar(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/filtrar")

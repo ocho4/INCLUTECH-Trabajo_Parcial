@@ -14,13 +14,24 @@ public class RolController {
     @Autowired
     private RolService rolService;
 
-    @PostMapping
+    @PostMapping("/registrar")
     public ResponseEntity<Rol> registrar(@RequestBody Rol rol) {
         return ResponseEntity.ok(rolService.registrar(rol));
     }
 
-    @GetMapping
+    @GetMapping("/listar")
     public ResponseEntity<List<Rol>> listar() {
         return ResponseEntity.ok(rolService.listar());
+    }
+
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<Rol> actualizar(@PathVariable Integer id, @RequestBody Rol rol) {
+        rol.setId(id);
+        return ResponseEntity.ok(rolService.registrar(rol));
+    }
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        rolService.eliminar(id);
+        return ResponseEntity.noContent().build();
     }
 }

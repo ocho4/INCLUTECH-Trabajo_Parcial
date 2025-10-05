@@ -14,13 +14,23 @@ public class RecursoEducativoFavoritoUsuarioController {
     @Autowired
     private RecursoEducativoFavoritoUsuarioService favoritoService;
 
-    @PostMapping
+    @PostMapping("/registrar")
     public ResponseEntity<RecursoEducativoFavoritoUsuario> registrar(@RequestBody RecursoEducativoFavoritoUsuario favorito) {
         return ResponseEntity.ok(favoritoService.registrar(favorito));
     }
 
-    @GetMapping
+    @GetMapping("/listar")
     public ResponseEntity<List<RecursoEducativoFavoritoUsuario>> listar() {
         return ResponseEntity.ok(favoritoService.listar());
+    }
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<RecursoEducativoFavoritoUsuario> actualizar(@PathVariable Integer id, @RequestBody RecursoEducativoFavoritoUsuario favorito) {
+        favorito.setId(id);
+        return ResponseEntity.ok(favoritoService.registrar(favorito));
+    }
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        favoritoService.eliminar(id);
+        return ResponseEntity.noContent().build();
     }
 }

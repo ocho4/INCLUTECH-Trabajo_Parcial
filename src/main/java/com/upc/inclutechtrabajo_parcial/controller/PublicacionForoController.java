@@ -15,14 +15,26 @@ public class PublicacionForoController {
     @Autowired
     private PublicacionForoService publicacionService;
 
-    @PostMapping
+    @PostMapping("/registrar")
     public ResponseEntity<PublicacionForo> registrar(@RequestBody PublicacionForo publicacion) {
         return ResponseEntity.ok(publicacionService.registrar(publicacion));
     }
 
-    @GetMapping
+    @GetMapping("/listar")
     public ResponseEntity<List<PublicacionForo>> listar() {
         return ResponseEntity.ok(publicacionService.listar());
+    }
+
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<PublicacionForo> actualizar(@PathVariable Integer id, @RequestBody PublicacionForo publicacion) {
+        publicacion.setId(id);
+        return ResponseEntity.ok(publicacionService.registrar(publicacion));
+    }
+
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        publicacionService.eliminar(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/filtrar/usuario")
@@ -39,4 +51,5 @@ public class PublicacionForoController {
     public ResponseEntity<List<PublicacionForoDTO>> buscarPorTitulo(@RequestParam String palabra) {
         return ResponseEntity.ok(publicacionService.buscarPorTitulo(palabra));
     }
+
 }
