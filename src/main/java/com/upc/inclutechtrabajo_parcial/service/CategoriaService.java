@@ -19,4 +19,11 @@ public class CategoriaService {
     public List<Categoria> listar() {
         return categoriaRepository.findAll();
     }
+
+    public void eliminar(Integer id) {
+        if (!categoriaRepository.existsById(id)) {
+            throw new RuntimeException("Categoría con ID " + id + " no encontrada");
+        }
+        categoriaRepository.deleteById(id);
+    }
 }

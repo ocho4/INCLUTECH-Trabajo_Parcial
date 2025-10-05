@@ -19,4 +19,12 @@ public class RecursoEducativoService {
     public List<RecursoEducativo> listar() {
         return recursoRepository.findAll();
     }
+
+    public void eliminar(Integer id) {
+        if (!recursoRepository.existsById(id)) {
+            throw new RuntimeException("Recurso educativo con ID " + id + " no encontrado");
+        }
+        recursoRepository.deleteById(id);
+    }
+
 }

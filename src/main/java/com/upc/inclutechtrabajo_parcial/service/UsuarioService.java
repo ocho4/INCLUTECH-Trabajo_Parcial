@@ -42,6 +42,13 @@ public class UsuarioService {
                 .collect(Collectors.toList());
     }
 
+    public void eliminar(Integer id) {
+        if (!usuarioRepository.existsById(id)) {
+            throw new RuntimeException("Usuario con ID " + id + " no encontrado");
+        }
+        usuarioRepository.deleteById(id);
+    }
+
     private UsuarioDTO convertirADTO(Usuario usuario) {
         UsuarioDTO dto = new UsuarioDTO();
         dto.setId(usuario.getId());

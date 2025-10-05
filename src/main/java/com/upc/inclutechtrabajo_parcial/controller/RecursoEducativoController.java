@@ -31,7 +31,7 @@ public class RecursoEducativoController {
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+    public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
         recursoService.eliminar(id);
         return ResponseEntity.noContent().build();
     }

@@ -30,7 +30,7 @@ public class CategoriaController {
         return ResponseEntity.ok(categoriaService.registrar(categoria));
     }
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+    public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
         categoriaService.eliminar(id);
         return ResponseEntity.noContent().build();
     }

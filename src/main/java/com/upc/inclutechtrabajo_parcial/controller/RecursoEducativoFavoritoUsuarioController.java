@@ -29,7 +29,7 @@ public class RecursoEducativoFavoritoUsuarioController {
         return ResponseEntity.ok(favoritoService.registrar(favorito));
     }
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+    public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
         favoritoService.eliminar(id);
         return ResponseEntity.noContent().build();
     }

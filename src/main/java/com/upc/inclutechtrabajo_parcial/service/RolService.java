@@ -19,4 +19,12 @@ public class RolService {
     public List<Rol> listar() {
         return rolRepository.findAll();
     }
+
+    public void eliminar(Integer id) {
+        if (!rolRepository.existsById(id)) {
+            throw new RuntimeException("Rol con ID " + id + " no encontrado");
+        }
+        rolRepository.deleteById(id);
+    }
+
 }

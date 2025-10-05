@@ -19,4 +19,12 @@ public class ForoService {
     public List<Foro> listar() {
         return foroRepository.findAll();
     }
+
+    public void eliminar(Integer id) {
+        if (!foroRepository.existsById(id)) {
+            throw new RuntimeException("Foro con ID " + id + " no encontrado");
+        }
+        foroRepository.deleteById(id);
+    }
+
 }

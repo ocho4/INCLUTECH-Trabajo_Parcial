@@ -30,7 +30,7 @@ public class CategoriaRecursoEducativoController {
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+    public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
         categoriaRecursoService.eliminar(id);
         return ResponseEntity.noContent().build();
     }

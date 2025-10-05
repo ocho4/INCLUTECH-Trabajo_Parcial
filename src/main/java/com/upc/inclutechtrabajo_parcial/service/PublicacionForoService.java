@@ -19,4 +19,12 @@ public class PublicacionForoService {
     public List<PublicacionForo> listar() {
         return publicacionRepository.findAll();
     }
+
+    public void eliminar(Integer id) {
+        if (!publicacionRepository.existsById(id)) {
+            throw new RuntimeException("Publicación con ID " + id + " no encontrada");
+        }
+        publicacionRepository.deleteById(id);
+    }
+
 }

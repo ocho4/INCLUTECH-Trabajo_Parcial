@@ -19,4 +19,12 @@ public class RecursoEducativoFavoritoUsuarioService {
     public List<RecursoEducativoFavoritoUsuario> listar() {
         return favoritoRepository.findAll();
     }
+
+    public void eliminar(Integer id) {
+        if (!favoritoRepository.existsById(id)) {
+            throw new RuntimeException("Recurso favorito con ID " + id + " no encontrado");
+        }
+        favoritoRepository.deleteById(id);
+    }
+
 }

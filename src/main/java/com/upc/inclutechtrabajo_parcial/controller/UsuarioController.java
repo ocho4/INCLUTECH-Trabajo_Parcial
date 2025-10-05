@@ -30,7 +30,7 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.registrar(dto));
     }
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+    public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
         usuarioService.eliminar(id);
         return ResponseEntity.noContent().build();
     }

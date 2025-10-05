@@ -32,7 +32,7 @@ public class PublicacionForoController {
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+    public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
         publicacionService.eliminar(id);
         return ResponseEntity.noContent().build();
     }

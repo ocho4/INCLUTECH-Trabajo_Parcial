@@ -30,7 +30,7 @@ public class NotificacionController {
         return ResponseEntity.ok(notificacionService.registrar(notificacion));
     }
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+    public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
         notificacionService.eliminar(id);
         return ResponseEntity.noContent().build();
     }

@@ -19,4 +19,11 @@ public class ForoQueSigueUsuarioService {
     public List<ForoQueSigueUsuario> listar() {
         return foroQueSigueUsuarioRepository.findAll();
     }
+    public void eliminar(Integer id) {
+        if (!foroQueSigueUsuarioRepository.existsById(id)) {
+            throw new RuntimeException("Registro de seguimiento con ID " + id + " no encontrado");
+        }
+        foroQueSigueUsuarioRepository.deleteById(id);
+    }
+
 }

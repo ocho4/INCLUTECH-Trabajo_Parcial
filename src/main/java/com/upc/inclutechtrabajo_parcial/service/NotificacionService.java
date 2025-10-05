@@ -19,4 +19,12 @@ public class NotificacionService {
     public List<Notificacion> listar() {
         return notificacionRepository.findAll();
     }
+
+    public void eliminar(Integer id) {
+        if (!notificacionRepository.existsById(id)) {
+            throw new RuntimeException("Notificación con ID " + id + " no encontrada");
+        }
+        notificacionRepository.deleteById(id);
+    }
+
 }

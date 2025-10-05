@@ -19,4 +19,11 @@ public class ComentarioService {
     public List<Comentario> listar() {
         return comentarioRepository.findAll();
     }
+
+    public void eliminar(Integer id) {
+        if (!comentarioRepository.existsById(id)) {
+            throw new RuntimeException("Comentario con ID " + id + " no encontrado");
+        }
+        comentarioRepository.deleteById(id);
+    }
 }

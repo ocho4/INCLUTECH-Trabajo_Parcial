@@ -30,7 +30,7 @@ public class RolController {
         return ResponseEntity.ok(rolService.registrar(rol));
     }
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+    public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
         rolService.eliminar(id);
         return ResponseEntity.noContent().build();
     }
