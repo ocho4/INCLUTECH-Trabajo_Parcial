@@ -5,6 +5,7 @@ import com.upc.inclutechtrabajo_parcial.model.Usuario;
 import com.upc.inclutechtrabajo_parcial.repository.RolRepository;
 import com.upc.inclutechtrabajo_parcial.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
