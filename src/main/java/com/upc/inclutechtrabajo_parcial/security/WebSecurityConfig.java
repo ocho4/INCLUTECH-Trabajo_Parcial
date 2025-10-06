@@ -51,16 +51,17 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // ✅ Nueva sintaxis
+                .csrf(csrf -> csrf.disable()) //
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/auth/**").permitAll() // ✅ Permite acceso sin autenticación
-                        .anyRequest().authenticated() // ✅ El resto requiere autenticación
+                        .requestMatchers("/", "/health", "/info").permitAll()
+                        .requestMatchers("/auth/**").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .exceptionHandling(exceptions -> exceptions
-                        .authenticationEntryPoint(jwtAuthenticationEntryPoint) // ✅ Manejo de excepciones
+                        .authenticationEntryPoint(jwtAuthenticationEntryPoint) //
                 )
                 .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // ✅ Sin sesiones
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS) //
                 );
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
