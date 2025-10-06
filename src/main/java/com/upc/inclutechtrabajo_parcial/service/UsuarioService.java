@@ -59,4 +59,17 @@ public class UsuarioService {
         dto.setRolId(usuario.getRol() != null ? usuario.getRol().getId() : null);
         return dto;
     }
+
+    public List<UsuarioDTO> filtrarPorRol(String rol) {
+        return usuarioRepository.findByRolNombreIgnoreCase(rol)
+                .stream()
+                .map(this::convertirADTO)
+                .collect(Collectors.toList());
+    }
+    public List<UsuarioDTO> listarConFavoritos() {
+        return usuarioRepository.findUsuariosConFavoritos()
+                .stream()
+                .map(this::convertirADTO)
+                .collect(Collectors.toList());
+    }
 }
