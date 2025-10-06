@@ -9,11 +9,12 @@ public class HomeController {
 
     @GetMapping("/")
     public String home() {
-        return "INCLUTECH API - Trabajo Parcial está funcionando correctamente!";
+        return "🚀 INCLUTECH API - Trabajo Parcial está funcionando correctamente! ";
     }
 
     @GetMapping("/health")
     public String health() {
-        return "API Health Check - OK";
+        return "✅ API Health Check - OK - ";
     }
+
 }
