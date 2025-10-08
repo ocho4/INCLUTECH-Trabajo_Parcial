@@ -1,5 +1,6 @@
 package com.upc.inclutechtrabajo_parcial.controller;
 
+import com.upc.inclutechtrabajo_parcial.dto.CategoriaDTO;
 import com.upc.inclutechtrabajo_parcial.model.Categoria;
 import com.upc.inclutechtrabajo_parcial.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +21,15 @@ public class CategoriaController {
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<Categoria>> listar() {
+    public ResponseEntity<List<CategoriaDTO>> listar() {
         return ResponseEntity.ok(categoriaService.listar());
     }
 
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Categoria> actualizar(@PathVariable Integer id, @RequestBody Categoria categoria) {
-        categoria.setId(id);
-        return ResponseEntity.ok(categoriaService.registrar(categoria));
+    public ResponseEntity<CategoriaDTO> actualizar(@PathVariable Integer id, @RequestBody CategoriaDTO categoriaDTO) {
+        return ResponseEntity.ok(categoriaService.actualizar(id, categoriaDTO));
     }
+
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
         categoriaService.eliminar(id);

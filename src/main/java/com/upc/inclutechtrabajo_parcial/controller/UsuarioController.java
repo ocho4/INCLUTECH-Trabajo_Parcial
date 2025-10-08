@@ -14,7 +14,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping("/registar")
+    @PostMapping("/registrar")
     public ResponseEntity<UsuarioDTO> registrar(@RequestBody UsuarioDTO dto) {
         return ResponseEntity.ok(usuarioService.registrar(dto));
     }
@@ -27,7 +27,7 @@ public class UsuarioController {
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<UsuarioDTO> actualizar(@PathVariable Integer id, @RequestBody UsuarioDTO dto) {
         dto.setId(id);
-        return ResponseEntity.ok(usuarioService.registrar(dto));
+        return ResponseEntity.ok(usuarioService.actualizar(id, dto));
     }
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
@@ -43,5 +43,4 @@ public class UsuarioController {
     public ResponseEntity<List<UsuarioDTO>> listarUsuariosConFavoritos() {
         return ResponseEntity.ok(usuarioService.listarConFavoritos());
     }
-
 }

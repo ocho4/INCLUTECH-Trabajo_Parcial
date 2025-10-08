@@ -1,5 +1,6 @@
 package com.upc.inclutechtrabajo_parcial.controller;
 
+import com.upc.inclutechtrabajo_parcial.dto.NotificacionDTO;
 import com.upc.inclutechtrabajo_parcial.model.Notificacion;
 import com.upc.inclutechtrabajo_parcial.service.NotificacionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +21,15 @@ public class NotificacionController {
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<Notificacion>> listar() {
+    public ResponseEntity<List<NotificacionDTO>> listar() {
         return ResponseEntity.ok(notificacionService.listar());
     }
 
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<Notificacion> actualizar(@PathVariable Integer id, @RequestBody Notificacion notificacion) {
-        notificacion.setId(id);
-        return ResponseEntity.ok(notificacionService.registrar(notificacion));
+        return ResponseEntity.ok(notificacionService.actualizar(id, notificacion));
     }
+
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
         notificacionService.eliminar(id);

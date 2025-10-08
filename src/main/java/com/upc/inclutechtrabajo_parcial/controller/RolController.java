@@ -1,5 +1,6 @@
 package com.upc.inclutechtrabajo_parcial.controller;
 
+import com.upc.inclutechtrabajo_parcial.dto.RolDTO;
 import com.upc.inclutechtrabajo_parcial.model.Rol;
 import com.upc.inclutechtrabajo_parcial.service.RolService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +21,15 @@ public class RolController {
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<Rol>> listar() {
+    public ResponseEntity<List<RolDTO>> listar() {
         return ResponseEntity.ok(rolService.listar());
     }
 
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<Rol> actualizar(@PathVariable Integer id, @RequestBody Rol rol) {
-        rol.setId(id);
-        return ResponseEntity.ok(rolService.registrar(rol));
+        return ResponseEntity.ok(rolService.actualizar(id, rol));
     }
+
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
         rolService.eliminar(id);

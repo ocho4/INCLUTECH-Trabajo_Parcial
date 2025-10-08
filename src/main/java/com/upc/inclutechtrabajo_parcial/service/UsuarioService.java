@@ -42,6 +42,24 @@ public class UsuarioService {
                 .collect(Collectors.toList());
     }
 
+    public UsuarioDTO actualizar(Integer id, UsuarioDTO dto) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID " + id));
+
+        usuario.setNombre(dto.getNombre());
+        usuario.setUsername(dto.getUsername());
+        usuario.setEmail(dto.getEmail());
+        if (dto.getContrasena() != null && !dto.getContrasena().isBlank()) {
+            usuario.setContrasena(passwordEncoder.encode(dto.getContrasena()));
+        }
+        if (dto.getRolId() != null) {
+            rolRepository.findById(dto.getRolId()).ifPresent(usuario::setRol);
+        }
+
+        return convertirADTO(usuarioRepository.save(usuario));
+    }
+
+
     public void eliminar(Integer id) {
         if (!usuarioRepository.existsById(id)) {
             throw new RuntimeException("Usuario con ID " + id + " no encontrado");

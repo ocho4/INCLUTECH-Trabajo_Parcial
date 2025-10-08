@@ -1,5 +1,6 @@
 package com.upc.inclutechtrabajo_parcial.controller;
 
+import com.upc.inclutechtrabajo_parcial.dto.ForoDTO;
 import com.upc.inclutechtrabajo_parcial.model.Foro;
 import com.upc.inclutechtrabajo_parcial.service.ForoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +23,15 @@ public class ForoController {
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<Foro>> listar() {
+    public ResponseEntity<List<ForoDTO>> listar() {
         return ResponseEntity.ok(foroService.listar());
     }
 
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<Foro> actualizar(@PathVariable Integer id, @RequestBody Foro foro) {
-        foro.setId(id);
-        return ResponseEntity.ok(foroService.registrar(foro));
+        return ResponseEntity.ok(foroService.actualizar(id, foro));
     }
+
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
         foroService.eliminar(id);

@@ -21,14 +21,13 @@ public class PublicacionForoController {
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<PublicacionForo>> listar() {
+    public ResponseEntity<List<PublicacionForoDTO>> listar() {
         return ResponseEntity.ok(publicacionService.listar());
     }
 
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<PublicacionForo> actualizar(@PathVariable Integer id, @RequestBody PublicacionForo publicacion) {
-        publicacion.setId(id);
-        return ResponseEntity.ok(publicacionService.registrar(publicacion));
+        return ResponseEntity.ok(publicacionService.actualizar(id, publicacion));
     }
 
     @DeleteMapping("/eliminar/{id}")

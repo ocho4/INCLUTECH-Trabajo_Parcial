@@ -1,5 +1,6 @@
 package com.upc.inclutechtrabajo_parcial.controller;
 
+import com.upc.inclutechtrabajo_parcial.dto.ForoQueSigueUsuarioDTO;
 import com.upc.inclutechtrabajo_parcial.model.ForoQueSigueUsuario;
 import com.upc.inclutechtrabajo_parcial.service.ForoQueSigueUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +21,15 @@ public class ForoQueSigueUsuarioController {
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<ForoQueSigueUsuario>> listar() {
+    public ResponseEntity<List<ForoQueSigueUsuarioDTO>> listar() {
         return ResponseEntity.ok(foroSeguidoService.listar());
     }
 
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<ForoQueSigueUsuario> actualizar(@PathVariable Integer id, @RequestBody ForoQueSigueUsuario seguimiento) {
-        seguimiento.setId(id);
-        return ResponseEntity.ok(foroSeguidoService.registrar(seguimiento));
+        return ResponseEntity.ok(foroSeguidoService.actualizar(id, seguimiento));
     }
+
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
         foroSeguidoService.eliminar(id);

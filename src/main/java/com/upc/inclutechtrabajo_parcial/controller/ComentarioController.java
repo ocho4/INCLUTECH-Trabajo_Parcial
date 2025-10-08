@@ -1,5 +1,6 @@
 package com.upc.inclutechtrabajo_parcial.controller;
 
+import com.upc.inclutechtrabajo_parcial.dto.ComentarioDTO;
 import com.upc.inclutechtrabajo_parcial.model.Comentario;
 import com.upc.inclutechtrabajo_parcial.service.ComentarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +21,13 @@ public class ComentarioController {
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<Comentario>> listar() {
+    public ResponseEntity<List<ComentarioDTO>> listar() {
         return ResponseEntity.ok(comentarioService.listar());
     }
 
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Comentario> actualizar(@PathVariable Integer id, @RequestBody Comentario comentario) {
-        comentario.setId(id);
-        return ResponseEntity.ok(comentarioService.registrar(comentario));
+    public ResponseEntity<ComentarioDTO> actualizar(@PathVariable Integer id, @RequestBody ComentarioDTO comentarioDTO) {
+        return ResponseEntity.ok(comentarioService.actualizar(id, comentarioDTO));
     }
 
     @DeleteMapping("/eliminar/{id}")

@@ -1,11 +1,13 @@
 package com.upc.inclutechtrabajo_parcial.service;
 
+import com.upc.inclutechtrabajo_parcial.dto.NotificacionDTO;
 import com.upc.inclutechtrabajo_parcial.model.Notificacion;
 import com.upc.inclutechtrabajo_parcial.repository.NotificacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class NotificacionService {
@@ -16,8 +18,19 @@ public class NotificacionService {
         return notificacionRepository.save(notificacion);
     }
 
-    public List<Notificacion> listar() {
-        return notificacionRepository.findAll();
+    public List<NotificacionDTO> listar() {
+        return notificacionRepository.findAll()
+                .stream()
+                .map(this::convertirADTO)
+                .collect(Collectors.toList());
+    }
+
+    public Notificacion actualizar(Integer id, Notificacion notificacion) {
+        if (!notificacionRepository.existsById(id)) {
+            throw new RuntimeException("No se encontró la notificación con ID " + id);
+        }
+        notificacion.setId(id);
+        return notificacionRepository.save(notificacion);
     }
 
     public void eliminar(Integer id) {
@@ -27,4 +40,13 @@ public class NotificacionService {
         notificacionRepository.deleteById(id);
     }
 
+    private NotificacionDTO convertirADTO(Notificacion notificacion) {
+        NotificacionDTO dto = new NotificacionDTO();
+        dto.setId(notificacion.getId());
+        dto.setDescripcion(notificacion.getDescripcion());
+        if (notificacion.getUsuarioSigueForo() != null) {
+            dto.setUsuarioSigueForoId(notificacion.getUsuarioSigueForo().getId());
+        }
+        return dto;
+    }
 }

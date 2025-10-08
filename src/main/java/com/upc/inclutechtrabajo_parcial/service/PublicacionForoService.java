@@ -18,8 +18,11 @@ public class PublicacionForoService {
         return publicacionRepository.save(publicacion);
     }
 
-    public List<PublicacionForo> listar() {
-        return publicacionRepository.findAll();
+    public List<PublicacionForoDTO> listar() {
+        return publicacionRepository.findAll()
+                .stream()
+                .map(this::convertirADTO)
+                .collect(Collectors.toList());
     }
 
     public void eliminar(Integer id) {
@@ -27,6 +30,19 @@ public class PublicacionForoService {
             throw new RuntimeException("Publicación con ID " + id + " no encontrada");
         }
         publicacionRepository.deleteById(id);
+    }
+
+    public PublicacionForo actualizar(Integer id, PublicacionForo publicacionActualizada) {
+        PublicacionForo publicacion = publicacionRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Publicación no encontrada con ID " + id));
+
+        publicacion.setTitulo(publicacionActualizada.getTitulo());
+        publicacion.setContenido(publicacionActualizada.getContenido());
+        publicacion.setFecha(publicacionActualizada.getFecha());
+        publicacion.setUsuario(publicacionActualizada.getUsuario());
+        publicacion.setForo(publicacionActualizada.getForo());
+
+        return publicacionRepository.save(publicacion);
     }
 
     public List<PublicacionForoDTO> filtrarPorUsuario(Long idUsuario) {
@@ -55,8 +71,8 @@ public class PublicacionForoService {
         dto.setTitulo(p.getTitulo());
         dto.setContenido(p.getContenido());
         dto.setFecha(p.getFecha());
-        dto.setUsuarioId(p.getUsuario().getId());
-        dto.setForoId(p.getForo().getId());
+        dto.setUsuarioId(p.getUsuario() != null ? p.getUsuario().getId() : null);
+        dto.setForoId(p.getForo() != null ? p.getForo().getId() : null);
         return dto;
     }
 }

@@ -1,5 +1,6 @@
 package com.upc.inclutechtrabajo_parcial.controller;
 
+import com.upc.inclutechtrabajo_parcial.dto.CategoriaRecursoEducativoDTO;
 import com.upc.inclutechtrabajo_parcial.model.CategoriaRecursoEducativo;
 import com.upc.inclutechtrabajo_parcial.service.CategoriaRecursoEducativoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +21,15 @@ public class CategoriaRecursoEducativoController {
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<CategoriaRecursoEducativo>> listar() {
+    public ResponseEntity<List<CategoriaRecursoEducativoDTO>> listar() {
         return ResponseEntity.ok(categoriaRecursoService.listar());
     }
+
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<CategoriaRecursoEducativo> actualizar(@PathVariable Integer id, @RequestBody CategoriaRecursoEducativo categoriaRecurso) {
-        categoriaRecurso.setId(id);
-        return ResponseEntity.ok(categoriaRecursoService.registrar(categoriaRecurso));
+    public ResponseEntity<CategoriaRecursoEducativoDTO> actualizar(
+            @PathVariable Integer id,
+            @RequestBody CategoriaRecursoEducativoDTO categoriaRecursoDTO) {
+        return ResponseEntity.ok(categoriaRecursoService.actualizar(id, categoriaRecursoDTO));
     }
 
     @DeleteMapping("/eliminar/{id}")
