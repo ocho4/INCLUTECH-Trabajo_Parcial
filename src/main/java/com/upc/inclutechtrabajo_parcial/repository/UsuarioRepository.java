@@ -22,7 +22,4 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     //🔹 3. Usuarios que siguen foros
     @Query("SELECT DISTINCT u FROM Usuario u JOIN ForoQueSigueUsuario fsu ON u.id = fsu.usuario.id")
     List<Usuario> findUsuariosQueSiguenForos();
-    //🔹 4.Obtener todas las publicaciones creadas por un usuario específico.
-    @Query("SELECT p FROM PublicacionForo p WHERE p.usuario.id = :idUsuario")
-    List<PublicacionForo> findByUsuarioId(@Param("idUsuario") Long idUsuario);
 }

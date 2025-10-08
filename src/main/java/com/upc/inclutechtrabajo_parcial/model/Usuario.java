@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "usuarios")
-@Data   // ✅ genera getters, setters, toString, equals, hashCode
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

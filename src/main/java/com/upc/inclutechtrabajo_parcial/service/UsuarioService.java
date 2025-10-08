@@ -90,4 +90,10 @@ public class UsuarioService {
                 .map(this::convertirADTO)
                 .collect(Collectors.toList());
     }
+    public List<UsuarioDTO> listarUsuariosQueSiguenForos() {
+        return usuarioRepository.findUsuariosQueSiguenForos()
+                .stream()
+                .map(this::convertirADTO)
+                .collect(Collectors.toList());
+    }
 }

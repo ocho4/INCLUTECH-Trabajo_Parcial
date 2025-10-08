@@ -43,4 +43,8 @@ public class UsuarioController {
     public ResponseEntity<List<UsuarioDTO>> listarUsuariosConFavoritos() {
         return ResponseEntity.ok(usuarioService.listarConFavoritos());
     }
+    @GetMapping("/siguiendo-foros")
+    public ResponseEntity<List<UsuarioDTO>> listarUsuariosQueSiguenForos() {
+        return ResponseEntity.ok(usuarioService.listarUsuariosQueSiguenForos());
+    }
 }
