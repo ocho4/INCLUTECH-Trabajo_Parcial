@@ -11,15 +11,15 @@ import java.util.Optional;
 
 public interface PublicacionForoRepository extends JpaRepository<PublicacionForo, Integer> {
     Optional<Object> findByUsuario(Usuario usuario);
-    // 🔹 1. Buscar publicaciones por ID de usuario
+    // 1. Buscar publicaciones por ID de usuario
     @Query("SELECT p FROM PublicacionForo p WHERE p.usuario.id = :idUsuario")
     List<PublicacionForo> findByUsuarioId(@Param("idUsuario") Long idUsuario);
 
-    // 🔹 2. Buscar publicaciones por ID de foro
+    // 2. Buscar publicaciones por ID de foro
     @Query("SELECT p FROM PublicacionForo p WHERE p.foro.id = :idForo")
     List<PublicacionForo> findByForoId(@Param("idForo") Long idForo);
 
-    // 🔹 3. Buscar publicaciones por palabra clave en el título
+    // 3. Buscar publicaciones por palabra clave en el título
     @Query("SELECT p FROM PublicacionForo p WHERE LOWER(p.titulo) LIKE LOWER(CONCAT('%', :palabra, '%'))")
     List<PublicacionForo> findByTituloContaining(@Param("palabra") String palabra);
 }

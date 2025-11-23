@@ -13,13 +13,13 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     Optional<Usuario> findByUsername(String username);
     Optional<Usuario> findByEmail(String email);
 
-    // 🔹 1. Filtrar usuarios por nombre de rol (Profesor, Familiar, etc.)
+    // 1. Filtrar usuarios por nombre de rol (Profesor, Familiar, etc.)
     @Query("SELECT u FROM Usuario u WHERE LOWER(u.rol.nombre) = LOWER(:nombreRol)")
     List<Usuario> findByRolNombreIgnoreCase(@Param("nombreRol") String nombreRol);
-    //🔹 2. Filtrar Usuarios que tienen recursos educativos favoritos
+    // 2. Filtrar Usuarios que tienen recursos educativos favoritos
     @Query("SELECT DISTINCT u FROM Usuario u JOIN RecursoEducativoFavoritoUsuario f ON u.id = f.usuario.id")
     List<Usuario> findUsuariosConFavoritos();
-    //🔹 3. Usuarios que siguen foros
+    // 3. Usuarios que siguen foros
     @Query("SELECT DISTINCT u FROM Usuario u JOIN ForoQueSigueUsuario fsu ON u.id = fsu.usuario.id")
     List<Usuario> findUsuariosQueSiguenForos();
 }

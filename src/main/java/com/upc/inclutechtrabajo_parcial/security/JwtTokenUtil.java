@@ -12,11 +12,7 @@ import java.util.function.Function;
 
 @Component
 public class JwtTokenUtil {
-    // ✅ CORREGIR: Usar una clave base64 válida
     private final String SECRET_KEY = Base64.getEncoder().encodeToString("clave_super_secreta_muy_larga_para_seguridad".getBytes());
-
-    // O simplemente usar una cadena más simple pero válida
-    // private final String SECRET_KEY = "miClaveSecretaMuySegura1234567890abcdef";
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
