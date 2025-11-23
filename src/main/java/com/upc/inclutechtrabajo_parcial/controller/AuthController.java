@@ -35,7 +35,7 @@ public class AuthController {
                     new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
             );
         } catch (BadCredentialsException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("❌ Credenciales inválidas");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(" Credenciales inválidas");
         }
 
         final UserDetails userDetails = usuarioDetailsService.loadUserByUsername(request.getUsername());
